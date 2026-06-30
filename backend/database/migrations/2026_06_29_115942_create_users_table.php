@@ -25,11 +25,7 @@ return new class extends Migration
 
 
            
-            $table->enum('role', [
-                'user',
-                'admin'
-            ])
-            ->default('user');
+            $table->enum('role', ['job_seeker','employer','admin'])->default('job_seeker');
 
 
            
