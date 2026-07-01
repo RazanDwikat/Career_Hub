@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 
 
-class CVAnalysis extends Model
+class ImprovedResume extends Model
 {
 
 
@@ -15,15 +15,11 @@ class CVAnalysis extends Model
 
         'cv_id',
 
-        'ats_score',
+        'file_path',
 
-        'grammar_score',
+        'content',
 
-        'formatting_score',
-
-        'skills_found',
-
-        'suggestions'
+        'version'
 
     ];
 
@@ -32,12 +28,9 @@ class CVAnalysis extends Model
 
     protected $casts = [
 
-        'skills_found'=>'array',
-
-        'suggestions'=>'array'
+        'version'=>'integer'
 
     ];
-
 
 
 

@@ -5,13 +5,14 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
 
 
 class User extends Authenticatable
 {
 
-    use HasApiTokens, HasFactory;
+    use HasApiTokens, Notifiable;
+
 
 
     protected $fillable = [
@@ -19,10 +20,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+
         'role',
+
         'phone',
         'location',
         'bio',
+
         'is_active'
 
     ];
@@ -40,7 +44,9 @@ class User extends Authenticatable
 
     protected $casts = [
 
-        'is_active' => 'boolean'
+        'password'=>'hashed',
+
+        'is_active'=>'boolean'
 
     ];
 
@@ -55,34 +61,40 @@ class User extends Authenticatable
 
     public function companies()
     {
-
         return $this->hasMany(Company::class);
+    }
 
+
+
+    public function cvs()
+    {
+        return $this->hasMany(CV::class);
     }
 
 
 
     public function jobs()
     {
-
         return $this->hasMany(Job::class);
-
-    }
-
-    public function cvs()
-    {
-
-        return $this->hasMany(CV::class);
-
     }
 
 
 
     public function applications()
     {
-
         return $this->hasMany(Application::class);
-
     }
+
+
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function savedJobs()
+{
+    return $this->belongsToMany(Job::class,'saved_jobs');
+}
 
 }

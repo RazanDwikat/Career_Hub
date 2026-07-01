@@ -4,7 +4,6 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 
@@ -12,28 +11,39 @@ class CV extends Model
 {
 
 
-    use HasFactory;
-
-
-
-    protected $fillable=[
+    protected $fillable = [
 
         'user_id',
+
         'file_path',
+
         'original_name',
-        'is_active'
+
+        'version',
+
+        'status'
 
     ];
 
 
 
-    protected $casts=[
 
-        'is_active'=>'boolean'
+
+    protected $casts = [
+
+        'version'=>'integer'
 
     ];
 
 
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
 
     public function user()
@@ -42,6 +52,7 @@ class CV extends Model
         return $this->belongsTo(User::class);
 
     }
+
 
 
 
@@ -55,10 +66,23 @@ class CV extends Model
 
 
 
-    public function analysis()
+
+
+    public function analyses()
     {
 
-        return $this->hasOne(CVAnalysis::class);
+        return $this->hasMany(CVAnalysis::class);
+
+    }
+
+
+
+
+
+    public function improvedResumes()
+    {
+
+        return $this->hasMany(ImprovedResume::class);
 
     }
 

@@ -4,8 +4,6 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 
@@ -13,34 +11,51 @@ class Job extends Model
 {
 
 
-    use HasFactory, SoftDeletes;
-
-
-
     protected $fillable = [
 
-        'user_id',
+
         'company_id',
+
         'title',
+
         'description',
+
+        'category',
+
         'location',
+
         'job_type',
-        'experience',
-        'salary',
-        'deadline',
+
+        'experience_level',
+
+        'salary_min',
+
+        'salary_max',
+
+        'ai_risk_score',
+
         'status',
-        'risk_score'
+
+        'deadline'
+
 
     ];
+
 
 
 
 
     protected $casts = [
 
-        'deadline'=>'date'
+
+        'deadline'=>'date',
+
+
+        'ai_risk_score'=>'decimal:2'
+
 
     ];
+
 
 
 
@@ -53,21 +68,6 @@ class Job extends Model
     */
 
 
-
-    public function employer()
-    {
-
-        return $this->belongsTo(User::class,'user_id');
-
-    }
-
-
-    public function skills()
-    {
-
-         return $this->belongsToMany(Skill::class);
-
-    }
     public function company()
     {
 
@@ -75,12 +75,31 @@ class Job extends Model
 
     }
 
+
+
+
+
+    public function skills()
+    {
+
+        return $this->belongsToMany(Skill::class);
+
+    }
+
+
+
     public function applications()
     {
 
         return $this->hasMany(Application::class);
 
     }
+
+    public function savedByUsers()
+{
+    return $this->belongsToMany(User::class,'saved_jobs');
+}
+
 
 
 }

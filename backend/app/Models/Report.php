@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 
 
-class Application extends Model
+class Report extends Model
 {
 
 
@@ -17,11 +17,9 @@ class Application extends Model
 
         'job_id',
 
-        'cv_id',
+        'reason',
 
-        'status',
-
-        'message'
+        'status'
 
     ];
 
@@ -38,20 +36,11 @@ class Application extends Model
 
 
 
+
     public function job()
     {
 
         return $this->belongsTo(Job::class);
-
-    }
-
-
-
-
-    public function cv()
-    {
-
-        return $this->belongsTo(CV::class);
 
     }
 

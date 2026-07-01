@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 
 
-class Application extends Model
+class CoverLetter extends Model
 {
 
 
@@ -15,13 +15,13 @@ class Application extends Model
 
         'user_id',
 
-        'job_id',
-
         'cv_id',
 
-        'status',
+        'job_id',
 
-        'message'
+        'content',
+
+        'file_path'
 
     ];
 
@@ -38,20 +38,20 @@ class Application extends Model
 
 
 
-    public function job()
+    public function cv()
     {
 
-        return $this->belongsTo(Job::class);
+        return $this->belongsTo(CV::class);
 
     }
 
 
 
 
-    public function cv()
+    public function job()
     {
 
-        return $this->belongsTo(CV::class);
+        return $this->belongsTo(Job::class);
 
     }
 
